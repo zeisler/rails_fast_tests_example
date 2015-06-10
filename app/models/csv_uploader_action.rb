@@ -1,4 +1,4 @@
-class CsvUploader
+class CsvUploaderAction
 
   def initialize(orders:, data_normalizer:)
     @orders          = orders.to_ary
@@ -6,7 +6,7 @@ class CsvUploader
   end
 
   def call
-    self.processed_orders = orders.map do |order|
+    @processed_orders = orders.map do |order|
       data_normalizer.new(data: order).call
     end
     self
@@ -14,6 +14,10 @@ class CsvUploader
 
   def gross_revenue
     processed_orders.map(&:gross_revenue).inject(:+)
+  end
+
+  def notice
+    "Successfully uploaded csv with gross revenue of $#{gross_revenue.round(0) }"
   end
 
   private

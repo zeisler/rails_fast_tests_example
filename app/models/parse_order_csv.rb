@@ -1,3 +1,5 @@
+require 'csv'
+
 class ParseOrderCsv
 
   attr_reader :csv_file
@@ -8,7 +10,7 @@ class ParseOrderCsv
 
   def call
     array = []
-    CSV.parse(csv_file.read, :headers => true) do |row|
+    CSV.foreach(csv_file.path, :headers => true) do |row|
       array << row.to_h
     end
     array

@@ -4,7 +4,7 @@
 class NormalizeData
 
   def initialize(data:)
-    @data = data
+    @data = data.to_hash
   end
 
   def call
@@ -29,6 +29,10 @@ class NormalizeData
 
   def purchase
     @purchase ||= Purchase.create(PurchaseAttr.new(data, person_id: person.id, product_id: product.id).to_h)
+  end
+
+  def gross_revenue
+    purchase.count * product.price
   end
 
   private

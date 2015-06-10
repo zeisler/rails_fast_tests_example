@@ -46,6 +46,10 @@ RSpec.describe NormalizeData, active_mocker: true do
       expect(Purchase.first.count).to eq(2)
     end
 
+    it '#gross_revenue' do
+      expect(subject.gross_revenue.to_f).to eq 20.0
+    end
+
   end
 
   context 'reference data will only be created once' do

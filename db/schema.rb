@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150609033601) do
   create_table "purchases", force: :cascade do |t|
     t.integer "count"
     t.integer "person_id"
+    t.integer "product_id"
   end
 
 end

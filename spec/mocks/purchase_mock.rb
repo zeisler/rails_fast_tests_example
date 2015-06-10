@@ -6,11 +6,11 @@ class PurchaseMock < ActiveMocker::Mock::Base
   class << self
 
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new({"id"=>nil, "count"=>nil, "person_id"=>nil}).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new({"id"=>nil, "count"=>nil, "person_id"=>nil, "product_id"=>nil}).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::Mock::HashProcess.new({ id: Fixnum, count: Fixnum, person_id: Fixnum }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::Mock::HashProcess.new({ id: Fixnum, count: Fixnum, person_id: Fixnum, product_id: Fixnum }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -28,7 +28,7 @@ class PurchaseMock < ActiveMocker::Mock::Base
     private :mocked_class
 
     def attribute_names
-      @attribute_names ||= ["id", "count", "person_id"] | super
+      @attribute_names ||= ["id", "count", "person_id", "product_id"] | super
     end
 
     def primary_key
@@ -71,6 +71,14 @@ class PurchaseMock < ActiveMocker::Mock::Base
 
   def person_id=(val)
     write_attribute(:person_id, val)
+  end
+
+  def product_id
+    read_attribute(:product_id)
+  end
+
+  def product_id=(val)
+    write_attribute(:product_id, val)
   end
 
   ##################################
